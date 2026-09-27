@@ -1,0 +1,4 @@
+0123456789
+Tabular: 0 1 2 3 4 5 6 7 8 9
+Oldstyle: 0 1 2 3 4 5 6 7 8 9
+Fractions: ½ ⅓ ¼

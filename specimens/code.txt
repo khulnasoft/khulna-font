@@ -1,0 +1,5 @@
+const agent = await createAgent();
+function khulna() { return true; }
+if (x !== y && z <= w) { ... }
+// comment /* block */
+import { font } from "khulna";

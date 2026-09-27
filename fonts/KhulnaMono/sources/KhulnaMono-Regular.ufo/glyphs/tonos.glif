@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="tonos" format="2">
+  <advance width="600"/>
+  <unicode hex="0384"/>
+  <outline>
+    <contour>
+      <point x="279.0" y="805" type="line"/>
+      <point x="308" y="763.0167"/>
+      <point x="282.03340000000003" y="689"/>
+      <point x="232.6" y="689" type="curve"/>
+      <point x="232.6" y="757" type="line"/>
+      <point x="262.81336" y="757"/>
+      <point x="240" y="719.01336"/>
+      <point x="251.8" y="737" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

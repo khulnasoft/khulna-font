@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="hookabove" format="2">
+  <advance width="500"/>
+  <unicode hex="02DE"/>
+  <outline>
+    <contour>
+      <point x="140" y="700" type="line"/>
+      <point x="208" y="700" type="line"/>
+      <point x="208" y="727" type="line"/>
+      <point x="298" y="727"/>
+      <point x="298" y="720"/>
+      <point x="238" y="720" type="curve"/>
+      <point x="238" y="728" type="line"/>
+    </contour>
+  </outline>
+</glyph>

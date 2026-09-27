@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="ogonek" format="2">
+  <advance width="500"/>
+  <unicode hex="02BF"/>
+  <outline>
+    <contour>
+      <point x="250" y="0" type="line"/>
+      <point x="318" y="0" type="line"/>
+      <point x="318" y="-80"/>
+      <point x="290" y="-120"/>
+      <point x="360" y="-150" type="curve"/>
+      <point x="428" y="-82" type="line"/>
+      <point x="399.6" y="26.80000000000001"/>
+      <point x="386.0" y="-70"/>
+      <point x="250" y="-68" type="curve"/>
+    </contour>
+  </outline>
+</glyph>

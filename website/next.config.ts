@@ -1,0 +1,1 @@
+{\n  "$schema": "https://json.schemastore.org/nextjs-config",\n  "typescript": { "ignoreBuildErrors": true },\n  "output": "standalone"\n}

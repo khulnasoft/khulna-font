@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Khulna Sans", sans-serif;
+  --font-mono: "Khulna Mono", monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  color: #000000;
+}
+
+body.dark {
+  background: #0a0a0a;
+  color: #ffffff;
+}

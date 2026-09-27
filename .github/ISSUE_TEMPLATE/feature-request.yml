@@ -1,0 +1,16 @@
+name: Feature Request
+description: Request a new feature or glyph
+labels: [enhancement]
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: Feature
+      description: Describe the feature you'd like
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this important?

@@ -1,0 +1,77 @@
+name: Khulna Profile
+
+engine: fontbakery-engine
+
+description: >
+  Font Bakery profile for Khulna — Typeface by KhulnaSoft.
+  Custom checks for geometric sans and monospace fonts.
+
+conditions:
+  - is_variable_font: false
+
+settings:
+  family_name: "Khulna"
+  style_name: "Regular"
+
+checks:
+  # ── Metadata ──
+  - id: com.google.fonts/check/001
+    message: "Family name must be 'Khulna'"
+    severity: ERROR
+  - id: com.google.fonts/check/002
+    message: "Style name must be 'Regular'"
+    severity: ERROR
+  - id: com.google.fonts/check/027
+    message: "Version must be set"
+    severity: ERROR
+  - id: com.google.fonts/check/034
+    message: "Copyright must be set"
+    severity: ERROR
+  - id: com.google.fonts/check/035
+    message: "License must be OFL"
+    severity: ERROR
+  - id: com.google.fonts/check/038
+    message: "Vendor ID must be KHLS"
+    severity: ERROR
+
+  # ── Glyph coverage ──
+  - id: com.google.fonts/check/006
+    message: "Basic Latin must be present"
+    severity: ERROR
+  - id: com.google.fonts/check/007
+    message: "Latin-1 Supplement must be present"
+    severity: WARN
+
+  # ── Metrics ──
+  - id: com.google.fonts/check/053
+    message: "Vertical metrics must be correct"
+    severity: ERROR
+  - id: com.google.fonts/check/054
+    message: "Horizontal metrics must be consistent"
+    severity: ERROR
+
+  # ── OpenType ──
+  - id: com.google.fonts/check/067
+    message: "Kerning must be present"
+    severity: WARN
+  - id: com.google.fonts/check/068
+    message: "Ligatures must be present"
+    severity: WARN
+
+  # ── Rendering ──
+  - id: com.google.fonts/check/073
+    message: "Whitespace glyphs must be correct"
+    severity: ERROR
+  - id: com.google.fonts/check/074
+    message: "Null glyph must be present"
+    severity: ERROR
+
+  # ── Filename ──
+  - id: com.google.fonts/check/084
+    message: "Filename must follow convention"
+    severity: ERROR
+
+exceptions:
+  - id: com.google.fonts/check/053
+    reason: "Custom vertical metrics for geometric design"
+    status: WARN

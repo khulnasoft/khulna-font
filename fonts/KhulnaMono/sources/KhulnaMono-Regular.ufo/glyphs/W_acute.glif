@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Wacute" format="2">
+  <advance width="600"/>
+  <unicode hex="0174"/>
+  <outline>
+    <contour>
+      <point x="60" y="0" type="line"/>
+      <point x="140" y="0" type="line"/>
+      <point x="140" y="700" type="line"/>
+      <point x="60" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="360" y="0" type="line"/>
+      <point x="440" y="0" type="line"/>
+      <point x="440" y="700" type="line"/>
+      <point x="360" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="140" y="489.99999999999994" type="line"/>
+      <point x="220" y="489.99999999999994" type="line"/>
+      <point x="220" y="700" type="line"/>
+      <point x="140" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="280" y="489.99999999999994" type="line"/>
+      <point x="360" y="489.99999999999994" type="line"/>
+      <point x="360" y="700" type="line"/>
+      <point x="280" y="700" type="line"/>
+    </contour>
+    <contour>
+      <point x="140" y="449.99999999999994" type="line"/>
+      <point x="200" y="449.99999999999994" type="line"/>
+      <point x="200" y="530.0" type="line"/>
+      <point x="140" y="530.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="210" y="489.99999999999994" type="line"/>
+      <point x="290" y="489.99999999999994" type="line"/>
+      <point x="290" y="-250" type="line"/>
+      <point x="210" y="-250" type="line"/>
+    </contour>
+  </outline>
+</glyph>

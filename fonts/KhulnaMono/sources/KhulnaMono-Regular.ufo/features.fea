@@ -1,0 +1,66 @@
+feature liga {
+    sub f i by fi;
+    sub f l by fl;
+    sub f f by fft;
+} liga;
+
+feature kern {
+    pos A V -50;
+    pos A y -30;
+    pos T o -20;
+    pos T a -20;
+    pos T r -10;
+    pos T H -30;
+    pos V A -40;
+    pos W A -40;
+    pos Y A -40;
+    pos v A -30;
+    pos y A -30;
+} kern;
+
+feature calt {
+    # Contextual alternates
+} calt;
+
+feature case {
+    # Case-sensitive punctuation
+} case;
+
+feature tnum {
+    # Tabular numerals
+} tnum;
+
+feature pnum {
+    # Proportional numerals
+} pnum;
+
+feature frac {
+    # Fractions
+} frac;
+
+feature ordn {
+    # Ordinals
+} ordn;
+
+feature sups {
+    # Superscript
+} sups;
+
+feature subs {
+    # Subscript
+} subs;
+
+feature zero {
+    # Zero alternatives
+} zero;
+feature ss01 {
+    # Alternate zero
+} ss01;
+
+feature ss02 {
+    # Alternate one
+} ss02;
+
+feature ss03 {
+    # Alternate I/l
+} ss03;

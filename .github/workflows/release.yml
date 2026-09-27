@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm validate
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            fonts/**/*.woff2
+            fonts/**/*.woff
+            fonts/**/*.ttf
+
+      - run: pnpm --dir packages/khulna-sans publish --access public
+      - run: pnpm --dir packages/khulna-mono publish --access public

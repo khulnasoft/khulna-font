@@ -1,0 +1,28 @@
+{
+  "name": "khulna",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Khulna — Typeface by KhulnaSoft",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "pnpm build:fonts && pnpm build:packages && pnpm build:website",
+    "build:fonts": "python3 scripts/generate-sources.py && fontmake fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo -o ttf --output-dir dist/ && fontmake fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo -o ttf --output-dir dist/ && fontmake fonts/KhulnaSans/KhulnaSans.designspace -o variable --output-path dist/var/KhulnaSans-VF.ttf && python3 scripts/generate-woff2.py",
+    "build:packages": "python3 scripts/build-packages.py",
+    "sources": "python3 scripts/generate-sources.py",
+    "build:website": "pnpm --dir website build",
+    "dev": "pnpm --dir website dev",
+    "lint": "pnpm exec eslint .",
+    "test": "pnpm exec vitest run",
+    "validate": "python3 scripts/validate-fonts.py",
+    "shaping": "python3 scripts/shaping-check.py",
+    "check:design": "python3 scripts/check-design.py",
+    "check": "pnpm check:design && pnpm lint && pnpm test && pnpm validate && pnpm shaping",
+    "format": "pnpm exec prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}

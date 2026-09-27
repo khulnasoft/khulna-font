@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Khulna Mono";
+  src: url("../fonts/KhulnaMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --font-mono: "Khulna Mono";
+}
+
+.khulna-mono {
+  font-family: var(--font-mono);
+}

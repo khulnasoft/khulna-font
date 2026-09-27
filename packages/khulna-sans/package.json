@@ -1,0 +1,21 @@
+{
+  "name": "@khulnasoft/khulna-sans",
+  "version": "0.1.0",
+  "description": "Khulna Sans — Typeface by KhulnaSoft",
+  "license": "OFL-1.1",
+  "files": [
+    "fonts",
+    "css"
+  ],
+  "keywords": [
+    "font",
+    "typeface",
+    "khulna",
+    "sans"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khulnasoft/khulna"
+  },
+  "homepage": "https://khulna.font"
+}
