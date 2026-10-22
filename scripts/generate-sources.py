@@ -27,7 +27,6 @@ def _panose(is_mono):
     The previous code left bProportion=0 for both fonts, causing
     fontbakery's opentype/monospace check to FAIL on Khulna Mono.
     """
-    from fontTools.misc.arrayTools import Vector
     if is_mono:
         return [2, 11, 6, 9, 3, 0, 0, 0, 0, 0]
     return [2, 11, 5, 3, 2, 2, 2, 2, 2, 4]
@@ -58,9 +57,9 @@ def _build(out_path, family, style, weight, builder, glyph_names,
     i.openTypeOS2WidthClass = 9 if is_mono else 5
     i.openTypeOS2VendorID = "KHLS"
     i.openTypeOS2FamilyClass = (0, 0)
-    i.openTypeOS2Selection = [7]  # bit 7 = USE_TYPO_METRICS
+    i.openTypeOS2Selection = [7]  # bit 7 = USE_TYPO_METRICS (REGULAR bit set by fontmake)
     i.openTypeOS2Type = [0]
-    i.openTypeOS2UnicodeRanges = [0, 1]
+    i.openTypeOS2UnicodeRanges = [0, 1]  # bit 0 = Basic Latin, bit 1 = Latin-1 Supplement
     i.openTypeOS2CodePageRanges = [0, 0]
     i.openTypeOS2TypoAscender = tokens.ASC
     i.openTypeOS2TypoDescender = tokens.DESC
@@ -85,7 +84,7 @@ def _build(out_path, family, style, weight, builder, glyph_names,
 # the font isn't falsely flagged as monospaced by fontbakery's
 # "80% of ASCII glyphs share one width" heuristic (Khulna Sans at a single
 # width of 500 for every glyph triggered that).
-    wide = {"W": 600, "M": 600, "@": 650, "m": 600, "w": 600,
+    wide = {"W": 600, "M": 600, "at": 650, "m": 600, "w": 600,
             "Q": 600, "bracketleft": 560, "bracketright": 560,
             "guillemetleft": 600, "guillemetright": 600,
             "guilsinglleft": 560, "guilsinglright": 560,
@@ -102,22 +101,25 @@ def _build(out_path, family, style, weight, builder, glyph_names,
             "2": 560, "3": 560, "4": 560, "5": 560, "6": 560, "7": 560,
             "8": 560, "9": 560, "zero": 560, "one": 560, "two": 560,
             "three": 560, "four": 560, "five": 560, "six": 560, "seven": 560,
-            "eight": 560, "nine": 560, "ten": 560}
-    narrow = {"I": 350, "i": 350, "l": 350, "!": 350, "|": 350,
+            "eight": 560, "nine": 560, "ten": 560, "Omega": 650}
+    narrow = {"I": 350, "i": 350, "l": 350, "exclam": 350, "bar": 350,
               "iota": 350, "Iota": 350, "lslash": 350, "Lslash": 350,
               "dotlessi": 350, "exclamdown": 350, "brokenbar": 350,
               "sterling": 450, "yen": 450, "cent": 450, "dollar": 450,
               "section": 450, "copyright": 450, "ordfeminine": 450,
               "ordmasculine": 450, "degree": 450, "bullet": 450,
               "dagger": 450, "daggerdbl": 450, "periodcentered": 450}
+    width_map = dict(wide)
+    if is_mono:
+        width_map["Omega"] = 600
     for name in glyph_names:
         if name not in builder:
             continue
         g = f.newGlyph(name)
         if is_mono:
             g.width = tokens.WX_MONO
-        elif name in wide:
-            g.width = wide[name]
+        elif name in width_map:
+            g.width = width_map[name]
         elif name in narrow:
             g.width = narrow[name]
         else:

@@ -5,7 +5,7 @@ Replaces the previous profile.yaml, which used entirely fabricated check IDs
 below is a real, registered fontbakery check.
 
 Usage:
-    fontbakery check-profile fontbakery/khulna_profile.py dist/KhulnaSans-Regular.ttf
+    fontbakery check-profile tools/fontbakery/khulna_profile.py dist/KhulnaSans-Regular.ttf
 """
 
 PROFILE = {

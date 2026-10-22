@@ -79,11 +79,11 @@ def build_H(p):
 
 
 def build_I(p):
-    w = WX_DEF; hw = STROKE
-    rect(p, SB_L, 0, w - SB_R, hw)
-    rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
-    rect(p, SB_L, 0, SB_L + hw, CAP_H)
-    rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H)
+    w = 350; hw = STROKE; sb_l = 50; sb_r = 50
+    rect(p, sb_l, 0, w - sb_r, hw)
+    rect(p, sb_l, CAP_H - hw, w - sb_r, CAP_H)
+    rect(p, sb_l, 0, sb_l + hw, CAP_H)
+    rect(p, w - sb_r - hw, 0, w - sb_r, CAP_H)
 
 
 def build_J(p):
@@ -294,10 +294,10 @@ def build_h(p):
 
 
 def build_i(p):
-    w = WX_DEF
+    w = 350
     rect(p, w // 2 - STROKE // 2, 0, w // 2 + STROKE // 2, X_H)
     rect(p, w // 2 - STROKE // 2, ASC - STROKE, w // 2 + STROKE // 2, ASC)
-    rect(p, SB_L, DESC, SB_L + STROKE, X_H // 2)
+    rect(p, 50, DESC, 50 + STROKE, X_H // 2)
 
 
 def build_j(p):
@@ -316,9 +316,9 @@ def build_k(p):
 
 
 def build_l(p):
-    w = WX_DEF
-    rect(p, SB_L, DESC, SB_L + STROKE, ASC)
-    rect(p, SB_L, ASC - STROKE, w - SB_R, ASC)
+    w = 350
+    rect(p, 50, DESC, 50 + STROKE, ASC)
+    rect(p, 50, ASC - STROKE, w - 50, ASC)
 
 
 def build_m(p):
@@ -434,6 +434,14 @@ def build_z(p):
     rect(p, SB_L, 0, SB_L + STROKE, X_H)
 
 
+def build_zeta(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, w - SB_R, hw)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+
+
 # ── Glyph builders (digits) ───────────────────────────
 
 def build_zero(p):
@@ -528,7 +536,7 @@ def build_comma(p):
 
 
 def build_exclam(p):
-    w = WX_DEF; hw = STROKE
+    w = 350; hw = STROKE
     rect(p, w // 2 - hw // 2, ASC - hw, w // 2 + hw // 2, ASC)
     rect(p, w // 2 - hw // 2, DESC, w // 2 + hw // 2, ASC - hw)
     rect(p, w // 2 - hw, DESC, w // 2 + hw, DESC + hw)
@@ -725,7 +733,7 @@ def build_backslash(p):
 
 
 def build_bar(p):
-    w = WX_DEF; hw = STROKE
+    w = 350; hw = STROKE
     rect(p, w // 2 - hw // 4, DESC, w // 2 + hw // 4, ASC)
 
 
@@ -1305,7 +1313,7 @@ def build_fft(p):
 def build_Gamma(p):
     w = WX_DEF; hw = STROKE
     rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
-    rect(p, SB_L, CAP_H - hw, SB_L + hw, 0)
+    rect(p, SB_L, 0, SB_L + hw, CAP_H - hw)
 
 
 def build_Delta(p):
@@ -1334,6 +1342,28 @@ def build_Theta(p):
     rect(p, cx - r + hw // 2, cy - hw // 2, cx + r - hw // 2, cy + hw // 2)
 
 
+def build_theta(p):
+    w = WX_DEF; hw = STROKE
+    cx, cy = w // 2, X_H // 2
+    r = X_H // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx + r, cy))
+    p.curveTo((cx + r, cy + k), (cx + k, cy + r), (cx, cy + r))
+    p.curveTo((cx - k, cy + r), (cx - r, cy + k), (cx - r, cy))
+    p.curveTo((cx - r, cy - k), (cx - k, cy - r), (cx, cy - r))
+    p.curveTo((cx + k, cy - r), (cx + r, cy - k), (cx + r, cy))
+    p.closePath()
+    rect(p, cx - r + hw // 2, cy - hw // 2, cx + r - hw // 2, cy + hw // 2)
+
+
+def build_finalsigma(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+    rect(p, SB_L + hw, X_H // 2, w - SB_R, X_H // 2 + hw)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
+
+
 def build_Lambda(p):
     w = WX_DEF; hw = STROKE
     cx = w // 2
@@ -1353,11 +1383,25 @@ def build_Xi(p):
         rect(p, SB_L, y - hw // 2, w - SB_R, y + hw // 2)
 
 
+def build_xi(p):
+    w = WX_DEF; hw = STROKE
+    for frac in (0.7, 0.4, 0.1):
+        y = int(X_H * frac)
+        rect(p, SB_L, y - hw // 2, w - SB_R, y + hw // 2)
+
+
 def build_Pi(p):
     w = WX_DEF; hw = STROKE
     rect(p, SB_L, 0, SB_L + hw, CAP_H)
     rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H)
     rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
+
+
+def build_pi_lower(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
 
 
 def build_Sigma(p):
@@ -1391,14 +1435,35 @@ def build_Psi(p):
     cx = w // 2
     rect(p, cx - hw // 2, 0, cx + hw // 2, CAP_H)
     rect(p, cx - 90, CAP_H // 2, cx + 90, CAP_H // 2 + hw)
-    rect(p, SB_L, CAP_H // 2, SB_L + hw, 0)
-    rect(p, w - SB_R - hw, CAP_H // 2, w - SB_R, 0)
+    rect(p, SB_L, 0, SB_L + hw, CAP_H // 2)
+    rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H // 2)
 
 
 def build_Omega(p):
-    w = WX_DEF; hw = STROKE
+    w = 650; hw = STROKE
     cx = w // 2
-    r = CAP_H // 2 - hw // 2
+    r = (w - 2 * SB_L) // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx - r, CAP_H))
+    p.lineTo((cx - r, CAP_H - hw))
+    p.lineTo((cx - r, cy0 := CAP_H // 2))
+    p.curveTo((cx - r, CAP_H // 2 + k), (cx - k, r + CAP_H // 2), (cx, r + CAP_H // 2))
+    p.curveTo((cx + k, r + CAP_H // 2), (cx + r, CAP_H // 2 + k), (cx + r, CAP_H // 2))
+    p.lineTo((cx + r, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H - hw * 2))
+    p.lineTo((cx - r, CAP_H - hw * 2))
+    p.lineTo((cx - r - hw, CAP_H - hw))
+    p.lineTo((cx - r - hw, CAP_H))
+    p.closePath()
+
+
+def build_Omega_mono(p):
+    w = 600; hw = STROKE
+    cx = w // 2
+    r = (w - 2 * SB_L) // 2 - hw // 2
     k = r * 0.5523
     p.moveTo((cx - r, CAP_H))
     p.lineTo((cx - r, CAP_H - hw))
@@ -1503,7 +1568,8 @@ GLYPH_BUILDER_SANS = {
     "Pi": build_Pi, "Rho": build_P, "Sigma": build_Sigma,
     "Tau": build_T, "Upsilon": build_Y, "Phi": build_Phi,
     "Chi": build_X, "Psi": build_Psi, "Omega": build_Omega,
-    "zeta": build_z, "theta": build_Theta, "xi": build_Xi, "pi": build_Pi,
+    "zeta": build_zeta, "theta": build_theta, "xi": build_xi, "pi": build_pi_lower,
+    "finalsigma": build_finalsigma,
     "plusminus": build_plus,
     "onehalf": build_one, "onequarter": build_one, "threequarters": build_one,
     "radical": build_plus,
@@ -1561,6 +1627,7 @@ GLYPH_BUILDER_MONO.update({
     "backtick": build_backtick,
     "asciitilde": build_tildebar,
     "asciicircum": build_tildebar,
+    "Omega": build_Omega_mono,
 })
 
 # ── Unicode mapping ───────────────────────────────────
@@ -1670,6 +1737,7 @@ GLYPH_UNICODE = {
     "Rho": 0x03A1, "Sigma": 0x03A3, "Tau": 0x03A4, "Upsilon": 0x03A5,
     "Phi": 0x03A6, "Chi": 0x03A7, "Psi": 0x03A8, "Omega": 0x03A9,
     "zeta": 0x03B6, "theta": 0x03B8, "xi": 0x03BE, "pi": 0x03C0,
+    "finalsigma": 0x03C2,
     "plusminus": 0x00B1,
     "onehalf": 0x00BD, "onequarter": 0x00BC, "threequarters": 0x00BE,
     "radical": 0x221A,
