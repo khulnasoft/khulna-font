@@ -1325,6 +1325,7 @@ def build_Delta(p):
     p.lineTo((cx, CAP_H - hw))
     p.lineTo((cx + (w // 2 - SB_R) - hw, 0))
     p.lineTo((cx + (w // 2 - SB_R), 0))
+    p.lineTo((cx - (w // 2 - SB_L), 0))
     p.closePath()
 
 
@@ -1406,13 +1407,24 @@ def build_pi_lower(p):
 
 def build_Sigma(p):
     w = WX_DEF; hw = STROKE
-    cx = w // 2
-    p.moveTo((cx, CAP_H - hw // 2))
-    p.lineTo((w - SB_R, CAP_H - hw // 2))
-    p.lineTo((cx, CAP_H // 2))
-    p.lineTo((SB_L, hw // 2))
-    p.lineTo((cx, hw // 2))
-    p.lineTo((cx, CAP_H - hw // 2))
+    left, right = SB_L, w - SB_R
+    mid = CAP_H // 2
+    join = left + 155
+    p.moveTo((left, 0))
+    p.lineTo((right, 0))
+    p.lineTo((right, hw))
+    p.lineTo((left + 40, hw))
+    p.lineTo((join, mid - hw // 2))
+    p.lineTo((right, mid - hw // 2))
+    p.lineTo((right, mid + hw // 2))
+    p.lineTo((join, mid + hw // 2))
+    p.lineTo((left + 40, CAP_H - hw))
+    p.lineTo((right, CAP_H - hw))
+    p.lineTo((right, CAP_H))
+    p.lineTo((left, CAP_H))
+    p.lineTo((left, CAP_H - hw))
+    p.lineTo((left + 135, mid))
+    p.lineTo((left, hw))
     p.closePath()
 
 
@@ -1671,7 +1683,7 @@ GLYPH_UNICODE = {
     "alpha": 0x03B1, "beta": 0x03B2, "gamma": 0x03B3, "delta": 0x03B4,
     "epsilon": 0x03B5, "eta": 0x03B7, "iota": 0x03B9, "kappa": 0x03BA,
     "lambda": 0x03BB, "mu": 0x03BC, "nu": 0x03BD, "omicron": 0x03BF,
-    "rho": 0x03C1, "sigma": 0x03C3, "tau": 0x03C4, "upsilon": 0x03C5,
+    "rho": 0x03C1, "sigma": 0x03C3, "finalsigma": 0x03C2, "tau": 0x03C4, "upsilon": 0x03C5,
     "phi": 0x03C6, "chi": 0x03C7, "psi": 0x03C8, "omega": 0x03C9,
     # Spacing modifier letters. These are standalone spacing glyphs, NOT
     # combining marks — the Latin set bakes accents into precomposed
@@ -1737,7 +1749,6 @@ GLYPH_UNICODE = {
     "Rho": 0x03A1, "Sigma": 0x03A3, "Tau": 0x03A4, "Upsilon": 0x03A5,
     "Phi": 0x03A6, "Chi": 0x03A7, "Psi": 0x03A8, "Omega": 0x03A9,
     "zeta": 0x03B6, "theta": 0x03B8, "xi": 0x03BE, "pi": 0x03C0,
-    "finalsigma": 0x03C2,
     "plusminus": 0x00B1,
     "onehalf": 0x00BD, "onequarter": 0x00BC, "threequarters": 0x00BE,
     "radical": 0x221A,
