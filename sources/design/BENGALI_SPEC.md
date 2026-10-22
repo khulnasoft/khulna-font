@@ -24,13 +24,13 @@ actually types come out right.
 The Bengali must not be a Bengali font with Khulna's name on it. It is one
 system expressed in two scripts, so the Latin system is the constraint.
 
-| Property | Latin system says | Bengali must therefore |
-|---|---|---|
-| Stroke | uniform, 80/1000 | matra 76/1000, body strokes 80/1000 |
-| Contrast | none (monoline) | none — do not introduce modulated strokes |
-| Terminals | flat, horizontal cut | flat, horizontal; matra terminals align to the column |
+| Property    | Latin system says               | Bengali must therefore                                     |
+| ----------- | ------------------------------- | ---------------------------------------------------------- |
+| Stroke      | uniform, 80/1000                | matra 76/1000, body strokes 80/1000                        |
+| Contrast    | none (monoline)                 | none — do not introduce modulated strokes                  |
+| Terminals   | flat, horizontal cut            | flat, horizontal; matra terminals align to the column      |
 | Proportions | wide, geometric, circular bowls | match the same geometric rhythm, not text-book proportions |
-| Personality | plain, engineered, unhurried | plain, engineered, unhurried |
+| Personality | plain, engineered, unhurried    | plain, engineered, unhurried                               |
 
 ### 1.1 Vertical metrics
 
@@ -56,21 +56,21 @@ the script. Every base consonant must connect to it.
 
 Full machine-readable inventory: `bengali.BENGALI_INVENTORY`.
 
-| Group | Count | Range | Notes |
-|---|---|---|---|
-| Independent vowels | 11 | U+0985–U+0994 | inherent shapes, no matra variants needed |
-| Velars ক খ গ ঘ ঙ | 5 | U+0995–U+0999 | bowl + stem |
-| Palatals চ ছ জ ঝ ঞ | 5 | U+099A–U+099E | bowl + descending stem |
-| Retroflexes ট ঠ ড ঢ ণ | 5 | U+099F–U+09A3 | wedge/hook, no bowl |
-| Dentals ত থ দ ধ ন | 5 | U+09A4–U+09A8 | bowl + stem, thinner than velars |
-| Labials প ফ ব ভ ম | 5 | U+09AA–U+09AE | |
-| Approximants য র ল ৱ ঴ ব | 6 | U+09AF–U+09B5 | য/র/ল take half forms |
-| Sibilants শ ষ স হ | 4 | U+09B6–U+09B9 | |
-| Additional ড় ঢ় য় | 3 | U+09DC–U+09DF | via nukta |
-| Matras | 10 | U+09BE–U+09CC | **must be GDEF mark class** |
-| Marks | 4 | U+0981–U+0984 | anusvara, candrabindu, visarga, khanda ta |
-| Digits | 10 | U+09E6–U+09EF | |
-| Punctuation | 2+ | U+0964–U+0965 | danda, double danda |
+| Group                    | Count | Range         | Notes                                     |
+| ------------------------ | ----- | ------------- | ----------------------------------------- |
+| Independent vowels       | 11    | U+0985–U+0994 | inherent shapes, no matra variants needed |
+| Velars ক খ গ ঘ ঙ         | 5     | U+0995–U+0999 | bowl + stem                               |
+| Palatals চ ছ জ ঝ ঞ       | 5     | U+099A–U+099E | bowl + descending stem                    |
+| Retroflexes ট ঠ ড ঢ ণ    | 5     | U+099F–U+09A3 | wedge/hook, no bowl                       |
+| Dentals ত থ দ ধ ন        | 5     | U+09A4–U+09A8 | bowl + stem, thinner than velars          |
+| Labials প ফ ব ভ ম        | 5     | U+09AA–U+09AE |                                           |
+| Approximants য র ল ৱ ঴ ব | 6     | U+09AF–U+09B5 | য/র/ল take half forms                     |
+| Sibilants শ ষ স হ        | 4     | U+09B6–U+09B9 |                                           |
+| Additional ড় ঢ় য়      | 3     | U+09DC–U+09DF | via nukta                                 |
+| Matras                   | 10    | U+09BE–U+09CC | **must be GDEF mark class**               |
+| Marks                    | 4     | U+0981–U+0984 | anusvara, candrabindu, visarga, khanda ta |
+| Digits                   | 10    | U+09E6–U+09EF |                                           |
+| Punctuation              | 2+    | U+0964–U+0965 | danda, double danda                       |
 
 Out of scope for v1: Vedic extensions (U+1CD0–U+1CFF), Bengali-specific
 `৺` (U+09FA), and the rare `ঃ`-final forms.
@@ -100,12 +100,12 @@ runtime-merged half forms.
 
 Every base consonant that can join needs up to four drawn forms:
 
-| Form | Tag | When |
-|---|---|---|
-| Isolated | (default cmap) | word-initial, or after a non-joiner |
-| Initial | `init` | at word start, joiner to the right |
-| Medial | `medi` | between two joiners |
-| Final | `fina` | joiner to the left, nothing to the right |
+| Form     | Tag            | When                                     |
+| -------- | -------------- | ---------------------------------------- |
+| Isolated | (default cmap) | word-initial, or after a non-joiner      |
+| Initial  | `init`         | at word start, joiner to the right       |
+| Medial   | `medi`         | between two joiners                      |
+| Final    | `fina`         | joiner to the left, nothing to the right |
 
 Plus `pres` / `abvs` / `psts` / `blws` for matras that sit before, above,
 after, or below the base.

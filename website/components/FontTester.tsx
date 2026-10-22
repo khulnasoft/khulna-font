@@ -12,7 +12,11 @@ export function FontTester() {
   const [dark, setDark] = useState(false);
 
   return (
-    <section className={dark ? "bg-gray-900 text-white p-8" : "bg-white text-black p-8"}>
+    <section
+      className={
+        dark ? "bg-gray-900 text-white p-8" : "bg-white text-black p-8"
+      }
+    >
       <div className="mb-4">
         <label>Font</label>
         <select value={font} onChange={(e) => setFont(e.target.value)}>
@@ -87,7 +91,11 @@ export function FontTester() {
         <button onClick={() => setDark(!dark)}>
           {dark ? "Light" : "Dark"}
         </button>
-        <button onClick={() => navigator.clipboard.writeText(`font-family: "${font}";`)}>
+        <button
+          onClick={() =>
+            navigator.clipboard.writeText(`font-family: "${font}";`)
+          }
+        >
           Copy CSS
         </button>
       </div>

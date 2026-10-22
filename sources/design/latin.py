@@ -79,11 +79,11 @@ def build_H(p):
 
 
 def build_I(p):
-    w = WX_DEF; hw = STROKE
-    rect(p, SB_L, 0, w - SB_R, hw)
-    rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
-    rect(p, SB_L, 0, SB_L + hw, CAP_H)
-    rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H)
+    w = 350; hw = STROKE; sb_l = 50; sb_r = 50
+    rect(p, sb_l, 0, w - sb_r, hw)
+    rect(p, sb_l, CAP_H - hw, w - sb_r, CAP_H)
+    rect(p, sb_l, 0, sb_l + hw, CAP_H)
+    rect(p, w - sb_r - hw, 0, w - sb_r, CAP_H)
 
 
 def build_J(p):
@@ -294,10 +294,10 @@ def build_h(p):
 
 
 def build_i(p):
-    w = WX_DEF
+    w = 350
     rect(p, w // 2 - STROKE // 2, 0, w // 2 + STROKE // 2, X_H)
     rect(p, w // 2 - STROKE // 2, ASC - STROKE, w // 2 + STROKE // 2, ASC)
-    rect(p, SB_L, DESC, SB_L + STROKE, X_H // 2)
+    rect(p, 50, DESC, 50 + STROKE, X_H // 2)
 
 
 def build_j(p):
@@ -316,9 +316,9 @@ def build_k(p):
 
 
 def build_l(p):
-    w = WX_DEF
-    rect(p, SB_L, DESC, SB_L + STROKE, ASC)
-    rect(p, SB_L, ASC - STROKE, w - SB_R, ASC)
+    w = 350
+    rect(p, 50, DESC, 50 + STROKE, ASC)
+    rect(p, 50, ASC - STROKE, w - 50, ASC)
 
 
 def build_m(p):
@@ -434,6 +434,14 @@ def build_z(p):
     rect(p, SB_L, 0, SB_L + STROKE, X_H)
 
 
+def build_zeta(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, w - SB_R, hw)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+
+
 # ── Glyph builders (digits) ───────────────────────────
 
 def build_zero(p):
@@ -528,7 +536,7 @@ def build_comma(p):
 
 
 def build_exclam(p):
-    w = WX_DEF; hw = STROKE
+    w = 350; hw = STROKE
     rect(p, w // 2 - hw // 2, ASC - hw, w // 2 + hw // 2, ASC)
     rect(p, w // 2 - hw // 2, DESC, w // 2 + hw // 2, ASC - hw)
     rect(p, w // 2 - hw, DESC, w // 2 + hw, DESC + hw)
@@ -725,7 +733,7 @@ def build_backslash(p):
 
 
 def build_bar(p):
-    w = WX_DEF; hw = STROKE
+    w = 350; hw = STROKE
     rect(p, w // 2 - hw // 4, DESC, w // 2 + hw // 4, ASC)
 
 
@@ -1027,15 +1035,19 @@ def build_tonos(p):
 
 
 def build_hookabove(p):
-    """Hook above: a small rising hook."""
-    x0, y0 = ACC_INSET + 30, ACC_BASE
+    """Hook above: a small rising hook, drawn as a clean L-shape.
+
+    The previous version had a 14-degree jaggy segment that triggered
+    fontbakery's outline_jaggy_segments and outline_short_segments checks.
+    """
+    x0 = ACC_INSET + 40
+    y0 = ACC_BASE
     p.moveTo((x0, y0))
     p.lineTo((x0 + ACC_W, y0))
     p.lineTo((x0 + ACC_W, ACC_TOP - ACC_W))
-    p.curveTo((x0 + ACC_W + 90, ACC_TOP - ACC_W),
-              (x0 + ACC_W + 90, ACC_BASE + 20), (x0 + ACC_W + 30, ACC_BASE + 20))
-    p.lineTo((x0 + ACC_W + 30, ACC_BASE - 40 + ACC_W))
-    p.lineTo((x0, y0))
+    p.lineTo((x0 + ACC_W + 80, ACC_TOP - ACC_W))
+    p.lineTo((x0 + ACC_W + 80, ACC_TOP - ACC_W + ACC_W))
+    p.lineTo((x0, y0 + ACC_W))
     p.closePath()
 
 
@@ -1298,6 +1310,190 @@ def build_fft(p):
 # ── Builder registry ────────────────────────────────────
 
 
+def build_Gamma(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
+    rect(p, SB_L, 0, SB_L + hw, CAP_H - hw)
+
+
+def build_Delta(p):
+    w = WX_DEF; hw = STROKE
+    cx = w // 2
+    p.moveTo((cx, CAP_H))
+    p.lineTo((cx - (w // 2 - SB_L), 0))
+    p.lineTo((cx - (w // 2 - SB_L) + hw, 0))
+    p.lineTo((cx, CAP_H - hw))
+    p.lineTo((cx + (w // 2 - SB_R) - hw, 0))
+    p.lineTo((cx + (w // 2 - SB_R), 0))
+    p.lineTo((cx - (w // 2 - SB_L), 0))
+    p.closePath()
+
+
+def build_Theta(p):
+    w = WX_DEF; hw = STROKE
+    cx, cy = w // 2, CAP_H // 2
+    r = CAP_H // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx + r, cy))
+    p.curveTo((cx + r, cy + k), (cx + k, cy + r), (cx, cy + r))
+    p.curveTo((cx - k, cy + r), (cx - r, cy + k), (cx - r, cy))
+    p.curveTo((cx - r, cy - k), (cx - k, cy - r), (cx, cy - r))
+    p.curveTo((cx + k, cy - r), (cx + r, cy - k), (cx + r, cy))
+    p.closePath()
+    rect(p, cx - r + hw // 2, cy - hw // 2, cx + r - hw // 2, cy + hw // 2)
+
+
+def build_theta(p):
+    w = WX_DEF; hw = STROKE
+    cx, cy = w // 2, X_H // 2
+    r = X_H // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx + r, cy))
+    p.curveTo((cx + r, cy + k), (cx + k, cy + r), (cx, cy + r))
+    p.curveTo((cx - k, cy + r), (cx - r, cy + k), (cx - r, cy))
+    p.curveTo((cx - r, cy - k), (cx - k, cy - r), (cx, cy - r))
+    p.curveTo((cx + k, cy - r), (cx + r, cy - k), (cx + r, cy))
+    p.closePath()
+    rect(p, cx - r + hw // 2, cy - hw // 2, cx + r - hw // 2, cy + hw // 2)
+
+
+def build_finalsigma(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+    rect(p, SB_L + hw, X_H // 2, w - SB_R, X_H // 2 + hw)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
+
+
+def build_Lambda(p):
+    w = WX_DEF; hw = STROKE
+    cx = w // 2
+    p.moveTo((cx, CAP_H))
+    p.lineTo((SB_L, 0))
+    p.lineTo((SB_L + hw, 0))
+    p.lineTo((cx, CAP_H - hw))
+    p.lineTo((w - SB_R - hw, 0))
+    p.lineTo((w - SB_R, 0))
+    p.closePath()
+
+
+def build_Xi(p):
+    w = WX_DEF; hw = STROKE
+    for frac in (0.85, 0.5, 0.15):
+        y = int(CAP_H * frac)
+        rect(p, SB_L, y - hw // 2, w - SB_R, y + hw // 2)
+
+
+def build_xi(p):
+    w = WX_DEF; hw = STROKE
+    for frac in (0.7, 0.4, 0.1):
+        y = int(X_H * frac)
+        rect(p, SB_L, y - hw // 2, w - SB_R, y + hw // 2)
+
+
+def build_Pi(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, SB_L + hw, CAP_H)
+    rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H)
+    rect(p, SB_L, CAP_H - hw, w - SB_R, CAP_H)
+
+
+def build_pi_lower(p):
+    w = WX_DEF; hw = STROKE
+    rect(p, SB_L, 0, SB_L + hw, X_H)
+    rect(p, w - SB_R - hw, 0, w - SB_R, X_H)
+    rect(p, SB_L, X_H - hw, w - SB_R, X_H)
+
+
+def build_Sigma(p):
+    w = WX_DEF; hw = STROKE
+    left, right = SB_L, w - SB_R
+    mid = CAP_H // 2
+    join = left + 155
+    p.moveTo((left, 0))
+    p.lineTo((right, 0))
+    p.lineTo((right, hw))
+    p.lineTo((left + 40, hw))
+    p.lineTo((join, mid - hw // 2))
+    p.lineTo((right, mid - hw // 2))
+    p.lineTo((right, mid + hw // 2))
+    p.lineTo((join, mid + hw // 2))
+    p.lineTo((left + 40, CAP_H - hw))
+    p.lineTo((right, CAP_H - hw))
+    p.lineTo((right, CAP_H))
+    p.lineTo((left, CAP_H))
+    p.lineTo((left, CAP_H - hw))
+    p.lineTo((left + 135, mid))
+    p.lineTo((left, hw))
+    p.closePath()
+
+
+def build_Phi(p):
+    w = WX_DEF; hw = STROKE
+    cx, cy = w // 2, CAP_H // 2
+    r = CAP_H // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx + r, cy))
+    p.curveTo((cx + r, cy + k), (cx + k, cy + r), (cx, cy + r))
+    p.curveTo((cx - k, cy + r), (cx - r, cy + k), (cx - r, cy))
+    p.curveTo((cx - r, cy - k), (cx - k, cy - r), (cx, cy - r))
+    p.curveTo((cx + k, cy - r), (cx + r, cy - k), (cx + r, cy))
+    p.closePath()
+    rect(p, cx - hw // 2, 0, cx + hw // 2, CAP_H)
+
+
+def build_Psi(p):
+    w = WX_DEF; hw = STROKE
+    cx = w // 2
+    rect(p, cx - hw // 2, 0, cx + hw // 2, CAP_H)
+    rect(p, cx - 90, CAP_H // 2, cx + 90, CAP_H // 2 + hw)
+    rect(p, SB_L, 0, SB_L + hw, CAP_H // 2)
+    rect(p, w - SB_R - hw, 0, w - SB_R, CAP_H // 2)
+
+
+def build_Omega(p):
+    w = 650; hw = STROKE
+    cx = w // 2
+    r = (w - 2 * SB_L) // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx - r, CAP_H))
+    p.lineTo((cx - r, CAP_H - hw))
+    p.lineTo((cx - r, cy0 := CAP_H // 2))
+    p.curveTo((cx - r, CAP_H // 2 + k), (cx - k, r + CAP_H // 2), (cx, r + CAP_H // 2))
+    p.curveTo((cx + k, r + CAP_H // 2), (cx + r, CAP_H // 2 + k), (cx + r, CAP_H // 2))
+    p.lineTo((cx + r, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H - hw * 2))
+    p.lineTo((cx - r, CAP_H - hw * 2))
+    p.lineTo((cx - r - hw, CAP_H - hw))
+    p.lineTo((cx - r - hw, CAP_H))
+    p.closePath()
+
+
+def build_Omega_mono(p):
+    w = 600; hw = STROKE
+    cx = w // 2
+    r = (w - 2 * SB_L) // 2 - hw // 2
+    k = r * 0.5523
+    p.moveTo((cx - r, CAP_H))
+    p.lineTo((cx - r, CAP_H - hw))
+    p.lineTo((cx - r, cy0 := CAP_H // 2))
+    p.curveTo((cx - r, CAP_H // 2 + k), (cx - k, r + CAP_H // 2), (cx, r + CAP_H // 2))
+    p.curveTo((cx + k, r + CAP_H // 2), (cx + r, CAP_H // 2 + k), (cx + r, CAP_H // 2))
+    p.lineTo((cx + r, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H))
+    p.lineTo((cx + r + hw, CAP_H - hw))
+    p.lineTo((cx + r, CAP_H - hw * 2))
+    p.lineTo((cx - r, CAP_H - hw * 2))
+    p.lineTo((cx - r - hw, CAP_H - hw))
+    p.lineTo((cx - r - hw, CAP_H))
+    p.closePath()
+
+
+
 GLYPH_BUILDER_SANS = {
     "A": build_A, "B": build_B, "C": build_C, "D": build_D, "E": build_E,
     "F": build_F, "G": build_G, "H": build_H, "I": build_I, "J": build_J,
@@ -1375,6 +1571,17 @@ GLYPH_BUILDER_SANS = {
     "Eth": build_E, "eth": build_e,
     "Thorn": build_T, "thorn": build_t,
     "brokenbar": build_bar,
+    # Greek capitals — many reuse Latin builders since the shapes match
+    "Alpha": build_A, "Beta": build_B, "Gamma": build_Gamma,
+    "Delta": build_Delta, "Epsilon": build_E, "Zeta": build_Z,
+    "Eta": build_H, "Theta": build_Theta, "Iota": build_I,
+    "Kappa": build_K, "Lambda": build_Lambda, "Mu": build_M,
+    "Nu": build_N, "Xi": build_Xi, "Omicron": build_O,
+    "Pi": build_Pi, "Rho": build_P, "Sigma": build_Sigma,
+    "Tau": build_T, "Upsilon": build_Y, "Phi": build_Phi,
+    "Chi": build_X, "Psi": build_Psi, "Omega": build_Omega,
+    "zeta": build_zeta, "theta": build_theta, "xi": build_xi, "pi": build_pi_lower,
+    "finalsigma": build_finalsigma,
     "plusminus": build_plus,
     "onehalf": build_one, "onequarter": build_one, "threequarters": build_one,
     "radical": build_plus,
@@ -1432,6 +1639,7 @@ GLYPH_BUILDER_MONO.update({
     "backtick": build_backtick,
     "asciitilde": build_tildebar,
     "asciicircum": build_tildebar,
+    "Omega": build_Omega_mono,
 })
 
 # ── Unicode mapping ───────────────────────────────────
@@ -1475,7 +1683,7 @@ GLYPH_UNICODE = {
     "alpha": 0x03B1, "beta": 0x03B2, "gamma": 0x03B3, "delta": 0x03B4,
     "epsilon": 0x03B5, "eta": 0x03B7, "iota": 0x03B9, "kappa": 0x03BA,
     "lambda": 0x03BB, "mu": 0x03BC, "nu": 0x03BD, "omicron": 0x03BF,
-    "rho": 0x03C1, "sigma": 0x03C3, "tau": 0x03C4, "upsilon": 0x03C5,
+    "rho": 0x03C1, "sigma": 0x03C3, "finalsigma": 0x03C2, "tau": 0x03C4, "upsilon": 0x03C5,
     "phi": 0x03C6, "chi": 0x03C7, "psi": 0x03C8, "omega": 0x03C9,
     # Spacing modifier letters. These are standalone spacing glyphs, NOT
     # combining marks — the Latin set bakes accents into precomposed
@@ -1533,6 +1741,14 @@ GLYPH_UNICODE = {
     "Eth": 0x00D0, "eth": 0x00F0,
     "Thorn": 0x00DE, "thorn": 0x00FE,
     "brokenbar": 0x00A6,
+    # Greek capitals
+    "Alpha": 0x0391, "Beta": 0x0392, "Gamma": 0x0393, "Delta": 0x0394,
+    "Epsilon": 0x0395, "Zeta": 0x0396, "Eta": 0x0397, "Theta": 0x0398,
+    "Iota": 0x0399, "Kappa": 0x039A, "Lambda": 0x039B, "Mu": 0x039C,
+    "Nu": 0x039D, "Xi": 0x039E, "Omicron": 0x039F, "Pi": 0x03A0,
+    "Rho": 0x03A1, "Sigma": 0x03A3, "Tau": 0x03A4, "Upsilon": 0x03A5,
+    "Phi": 0x03A6, "Chi": 0x03A7, "Psi": 0x03A8, "Omega": 0x03A9,
+    "zeta": 0x03B6, "theta": 0x03B8, "xi": 0x03BE, "pi": 0x03C0,
     "plusminus": 0x00B1,
     "onehalf": 0x00BD, "onequarter": 0x00BC, "threequarters": 0x00BE,
     "radical": 0x221A,

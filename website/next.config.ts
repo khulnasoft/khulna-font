@@ -1,1 +1,8 @@
-{\n  "$schema": "https://json.schemastore.org/nextjs-config",\n  "typescript": { "ignoreBuildErrors": true },\n  "output": "standalone"\n}
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  typescript: { ignoreBuildErrors: true },
+  output: "standalone",
+};
+
+export default nextConfig;

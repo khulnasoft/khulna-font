@@ -5,8 +5,8 @@ on:
     branches: [main]
   pull_request:
     paths:
-      - 'fonts/**'
-      - 'scripts/**'
+      - "fonts/**"
+      - "scripts/**"
 
 jobs:
   build:
