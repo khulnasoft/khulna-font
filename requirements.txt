@@ -2,3 +2,4 @@ fonttools>=4.50.0
 fontmake>=3.8.0
 uharfbuzz>=0.40.0
 pillow>=10.0.0
+openstep-plist>=0.5.0
