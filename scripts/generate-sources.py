@@ -59,7 +59,7 @@ def _build(out_path, family, style, weight, builder, glyph_names,
     i.openTypeOS2FamilyClass = (0, 0)
     i.openTypeOS2Selection = [7]  # bit 7 = USE_TYPO_METRICS (REGULAR bit set by fontmake)
     i.openTypeOS2Type = [0]
-    i.openTypeOS2UnicodeRanges = [0, 1]  # bit 0 = Basic Latin, bit 1 = Latin-1 Supplement
+    i.openTypeOS2UnicodeRanges = [0, 1, 7]  # bit 0 = Basic Latin, bit 1 = Latin-1 Supplement, bit 7 = Greek and Coptic
     i.openTypeOS2CodePageRanges = [0, 0]
     i.openTypeOS2TypoAscender = tokens.ASC
     i.openTypeOS2TypoDescender = tokens.DESC
