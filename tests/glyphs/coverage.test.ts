@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 import * as fs from "fs";
-import * as path from "path";
 
 describe("Font files", () => {
   it("Sans TTF should exist", () => {
@@ -32,18 +31,34 @@ describe("Font files", () => {
 
 describe("Build pipeline", () => {
   it("UFO sources should exist", () => {
-    expect(fs.existsSync("fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo")).toBe(true);
-    expect(fs.existsSync("fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo")).toBe(true);
+    expect(
+      fs.existsSync("fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo"),
+    ).toBe(true);
+    expect(
+      fs.existsSync("fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo"),
+    ).toBe(true);
   });
 
   it("UFO should have fontinfo.plist", () => {
-    expect(fs.existsSync("fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo/fontinfo.plist")).toBe(true);
-    expect(fs.existsSync("fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo/fontinfo.plist")).toBe(true);
+    expect(
+      fs.existsSync(
+        "fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo/fontinfo.plist",
+      ),
+    ).toBe(true);
+    expect(
+      fs.existsSync(
+        "fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo/fontinfo.plist",
+      ),
+    ).toBe(true);
   });
 
   it("UFO should have glyphs directory", () => {
-    const sansGlyphs = fs.readdirSync("fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo/glyphs");
-    const monoGlyphs = fs.readdirSync("fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo/glyphs");
+    const sansGlyphs = fs.readdirSync(
+      "fonts/KhulnaSans/sources/KhulnaSans-Regular.ufo/glyphs",
+    );
+    const monoGlyphs = fs.readdirSync(
+      "fonts/KhulnaMono/sources/KhulnaMono-Regular.ufo/glyphs",
+    );
     expect(sansGlyphs.length).toBeGreaterThan(100);
     expect(monoGlyphs.length).toBeGreaterThan(100);
   });

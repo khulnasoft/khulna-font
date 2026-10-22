@@ -1,4 +1,10 @@
-export function FontSelector({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+export function FontSelector({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)}>
       <option value="Khulna Sans">Khulna Sans</option>
