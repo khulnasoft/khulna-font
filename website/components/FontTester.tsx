@@ -1,6 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { FontSelector } from "./FontSelector";
+import { WeightSlider } from "./WeightSlider";
+import { SizeSlider } from "./SizeSlider";
+import { GlyphGrid } from "./GlyphGrid";
+import { cn } from "@/lib/utils";
+
+const sampleTexts = [
+  { label: "Default", text: "Khulna — Typeface by KhulnaSoft" },
+  { label: "Alphabet", text: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" },
+  { label: "Numbers", text: "0123456789" },
+  { label: "Pangram", text: "The quick brown fox jumps over the lazy dog" },
+  { label: "Code", text: "function hello() { return 'Hello, World!'; }" },
+  { label: "UI Text", text: "Button • Link • Input • Checkbox • Radio" },
+];
 
 export function FontTester() {
   const [font, setFont] = useState("Khulna Sans");
@@ -8,97 +22,114 @@ export function FontTester() {
   const [size, setSize] = useState(64);
   const [tracking, setTracking] = useState(0);
   const [lineHeight, setLineHeight] = useState(1.5);
-  const [text, setText] = useState("Khulna — Typeface by KhulnaSoft");
+  const [text, setText] = useState(sampleTexts[0].text);
   const [dark, setDark] = useState(false);
 
+  const fontFamily = font === "Khulna Mono" ? "monospace" : "sans-serif";
+
   return (
-    <section
-      className={
-        dark ? "bg-gray-900 text-white p-8" : "bg-white text-black p-8"
-      }
-    >
-      <div className="mb-4">
-        <label>Font</label>
-        <select value={font} onChange={(e) => setFont(e.target.value)}>
-          <option value="Khulna Sans">Khulna Sans</option>
-          <option value="Khulna Mono">Khulna Mono</option>
-        </select>
+    <div className="space-y-6">
+      {/* Controls */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+        <div>
+          <label className="block text-sm font-medium mb-2">Font Family</label>
+          <FontSelector value={font} onChange={setFont} />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Sample Text</label>
+          <select
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950"
+          >
+            {sampleTexts.map((sample) => (
+              <option key={sample.label} value={sample.text}>
+                {sample.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex items-end">
+          <button
+            onClick={() => setDark(!dark)}
+            className={cn(
+              "w-full px-4 py-2 rounded-md transition-colors",
+              dark
+                ? "bg-gray-800 text-white"
+                : "bg-white text-gray-900 border border-gray-300"
+            )}
+          >
+            {dark ? "Light Mode" : "Dark Mode"}
+          </button>
+        </div>
       </div>
 
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        style={{
-          fontFamily: `"${font}"`,
-          fontSize: `${size}px`,
-          fontWeight: weight,
-          letterSpacing: `${tracking}px`,
-          lineHeight,
-          width: "100%",
-          minHeight: 120,
-        }}
-      />
-
-      <div className="mt-4 grid grid-cols-2 gap-4">
-        <label>
-          Weight {weight}
+      {/* Sliders */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+        <WeightSlider value={weight} onChange={setWeight} />
+        <SizeSlider value={size} onChange={setSize} />
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Tracking {tracking}px
+          </label>
           <input
             type="range"
-            min="100"
-            max="900"
-            step="100"
-            value={weight}
-            onChange={(e) => setWeight(Number(e.target.value))}
-          />
-        </label>
-
-        <label>
-          Size {size}px
-          <input
-            type="range"
-            min="12"
-            max="160"
-            value={size}
-            onChange={(e) => setSize(Number(e.target.value))}
-          />
-        </label>
-
-        <label>
-          Tracking {tracking}px
-          <input
-            type="range"
-            min="-5"
-            max="20"
+            min="-2"
+            max="10"
+            step="0.5"
             value={tracking}
             onChange={(e) => setTracking(Number(e.target.value))}
+            className="w-full"
           />
-        </label>
-
-        <label>
-          Line Height {lineHeight}
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Line Height {lineHeight}
+          </label>
           <input
             type="range"
             min="1"
-            max="3"
+            max="2.5"
             step="0.1"
             value={lineHeight}
             onChange={(e) => setLineHeight(Number(e.target.value))}
+            className="w-full"
           />
-        </label>
+        </div>
       </div>
 
-      <div className="mt-4 flex gap-4">
-        <button onClick={() => setDark(!dark)}>
-          {dark ? "Light" : "Dark"}
-        </button>
-        <button
-          onClick={() =>
-            navigator.clipboard.writeText(`font-family: "${font}";`)
-          }
-        >
-          Copy CSS
-        </button>
+      {/* Preview */}
+      <div
+        className={cn(
+          "p-8 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 transition-colors",
+          dark ? "bg-gray-900 text-white" : "bg-white text-black"
+        )}
+      >
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          style={{
+            fontFamily: `"${font}", ${fontFamily}`,
+            fontSize: `${size}px`,
+            fontWeight: weight,
+            letterSpacing: `${tracking}px`,
+            lineHeight,
+            width: "100%",
+            minHeight: 200,
+            resize: "vertical",
+          }}
+          className="w-full bg-transparent border-none outline-none resize-y"
+        />
       </div>
-    </section>
+
+      {/* Info */}
+      <div className="text-sm text-gray-500 dark:text-gray-500">
+        <p>Font: {font} | Weight: {weight} | Size: {size}px | Tracking: {tracking}px | Line Height: {lineHeight}</p>
+      </div>
+
+      <GlyphGrid fontFamily={`"${font}", ${fontFamily}`} />
+    </div>
   );
 }

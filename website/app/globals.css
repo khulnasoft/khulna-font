@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Khulna Sans";
+  src: url("/fonts/KhulnaSans-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Khulna Sans";
+  src: url("/fonts/KhulnaSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Khulna Mono";
+  src: url("/fonts/KhulnaMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-sans: "Khulna Sans", sans-serif;
   --font-mono: "Khulna Mono", monospace;
