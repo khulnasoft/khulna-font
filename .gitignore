@@ -22,3 +22,4 @@ website/.next
 website/out
 coverage
 .nyc_output
+.vercel

@@ -2,23 +2,75 @@ name: CI
 
 on:
   push:
+    branches: [main, develop]
   pull_request:
+    branches: [main, develop]
 
 jobs:
-  check:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 9
 
-      - uses: actions/setup-node@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: "20"
+          cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm check
-      - run: pnpm build
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install fonttools fontmake uharfbuzz pillow
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build fonts
+        run: pnpm build:fonts
+
+      - name: Run design checks
+        run: pnpm check:design
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Validate fonts
+        run: pnpm validate
+
+      - name: Run shaping checks
+        run: pnpm shaping
+
+      - name: Build packages
+        run: pnpm build:packages
+
+      - name: Upload font artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fonts
+          path: dist/
+          retention-days: 7
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: packages/
+          retention-days: 7
+
+      - name: Upload snapshot artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: tests/snapshots/
+          retention-days: 7
